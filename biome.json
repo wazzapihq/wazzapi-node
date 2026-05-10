@@ -1,0 +1,16 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+	"files": {
+		"includes": [
+			"src/**/*.ts",
+			"examples/**/*.ts",
+			"advanced-examples/**/*.ts",
+			"tests/**/*.ts",
+			"README.md",
+			"package.json",
+			"tsconfig.json",
+			"!!**/dist",
+			"!!**/node_modules"
+		]
+	}
+}
