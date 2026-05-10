@@ -10,7 +10,7 @@ import {
 
 describe("smoke", () => {
 	test("basic exports are wired", () => {
-		expect(__version__).toBe("0.2.0");
+		expect(__version__).toBe("0.3.0");
 
 		const client = new WazzapiClient({ apiKey: "smoke-test-token" });
 		expect(client.http.baseUrl).toBe("https://api.wazzapi.com");

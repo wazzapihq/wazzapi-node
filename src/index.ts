@@ -12,6 +12,7 @@ export type { MediaDownloadResult } from "./models";
 export * as models from "./models";
 export type { WazzapiModel } from "./models/base";
 export * from "./models/contacts";
+export * from "./models/devices";
 export * from "./models/groups";
 export * from "./models/media";
 export * from "./models/messages";
@@ -33,4 +34,4 @@ export {
 	WebhookHandler,
 } from "./webhooks";
 
-export const __version__ = "0.2.0";
+export const __version__ = "0.3.0";

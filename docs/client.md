@@ -63,6 +63,7 @@ const client = new WazzapiClient({
 The client exposes resources as properties:
 
 - `client.contacts` — contact and contact-group management
+- `client.devices` — organization device listing and device detail lookup
 - `client.groups` — WhatsApp group management
 - `client.messages` — send and manage messages
 - `client.templates` — template management

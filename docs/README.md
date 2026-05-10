@@ -4,6 +4,7 @@ Official documentation for the WazzAPI Node.js and TypeScript SDK.
 
 ## What you can do
 
+- Inspect WhatsApp devices and read their connection metadata
 - Send direct WhatsApp messages, including text, image, video, voice, document, location, contact cards, buttons, and lists
 - Manage WhatsApp groups, including participants, invite links, and group settings
 - Manage contacts and contact groups
@@ -52,6 +53,7 @@ console.log(response.message_id);
 
 - [Authentication](./authentication.md)
 - [Client](./client.md)
+- [Devices](./devices.md)
 - [Messages](./messages.md)
 - [Groups](./groups.md)
 - [Contacts](./contacts.md)

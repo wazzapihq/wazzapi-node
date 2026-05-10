@@ -2,6 +2,7 @@ import { WazzapiAPIError } from "./errors";
 import { filterNone, type JsonRecord, serializeData } from "./models/base";
 import {
 	ContactsResource,
+	DevicesResource,
 	GroupsResource,
 	MessagesResource,
 	TemplatesResource,
@@ -74,6 +75,7 @@ function normalizeBaseUrl(baseUrl: string): string {
 export class WazzapiClient {
 	readonly http: WazzapiHttpConfig;
 	readonly contacts: ContactsResource;
+	readonly devices: DevicesResource;
 	readonly groups: GroupsResource;
 	readonly messages: MessagesResource;
 	readonly templates: TemplatesResource;
@@ -91,6 +93,7 @@ export class WazzapiClient {
 		};
 
 		this.contacts = new ContactsResource(this);
+		this.devices = new DevicesResource(this);
 		this.groups = new GroupsResource(this);
 		this.messages = new MessagesResource(this);
 		this.templates = new TemplatesResource(this);

@@ -4,7 +4,7 @@ Official Node.js and TypeScript SDK for WazzAPI.
 
 This package is a modern Node.js and TypeScript SDK for WazzAPI, built with Bun-powered development, typed models, ESM/CJS output, and an API surface that feels natural in TypeScript.
 
-Use it to send WhatsApp messages, manage contacts and groups, work with templates, verify webhooks, and download encrypted WhatsApp media.
+Use it to inspect WhatsApp devices, send WhatsApp messages, manage contacts and groups, work with templates, verify webhooks, and download encrypted WhatsApp media.
 
 ## Highlights
 
@@ -16,6 +16,7 @@ Use it to send WhatsApp messages, manage contacts and groups, work with template
 - snake_case aliases for compatibility with existing naming styles
 - built-in webhook verification helpers
 - encrypted media download and decryption helpers
+- typed device listing and inspection APIs
 - standard and advanced runnable examples
 
 ## Supported Node.js versions
@@ -87,9 +88,10 @@ console.log(response.message_id, response.status);
 
 ## API shape
 
-The main client exposes four primary resources:
+The main client exposes five primary resources:
 
 - `client.contacts`
+- `client.devices`
 - `client.groups`
 - `client.messages`
 - `client.templates`
@@ -97,6 +99,7 @@ The main client exposes four primary resources:
 Preferred TypeScript method names use camelCase:
 
 - `client.contacts.listGroups()`
+- `client.devices.get()`
 - `client.groups.getParticipants()`
 - `client.messages.sendImage()`
 - `client.templates.builtinVariables()`
@@ -173,6 +176,7 @@ console.log(file.file_name, file.file_size);
 ### Standard examples
 
 - `examples/list-contacts.ts`
+- `examples/list-devices.ts`
 - `examples/send-message.ts`
 - `examples/create-template.ts`
 - `examples/preview-template.ts`
@@ -191,6 +195,7 @@ Topic-based documentation is available in `docs/`:
 - `docs/README.md`
 - `docs/authentication.md`
 - `docs/client.md`
+- `docs/devices.md`
 - `docs/messages.md`
 - `docs/groups.md`
 - `docs/contacts.md`
@@ -205,6 +210,7 @@ Repository: <https://github.com/wazzapihq/wazzapi-node>
 
 ```bash
 bun run examples/list-contacts.ts
+bun run examples/list-devices.ts
 bun run examples/send-message.ts
 bun run examples/create-template.ts
 bun run examples/preview-template.ts
