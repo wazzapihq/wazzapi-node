@@ -17,6 +17,7 @@
 	"files": [
 		"dist",
 		"advanced-examples",
+		"docs",
 		"examples",
 		"README.md"
 	],
@@ -30,13 +31,13 @@
 		"webhook",
 		"whatsapp"
 	],
-	"homepage": "https://github.com/wazzapihq/wazzapi-py",
+	"homepage": "https://github.com/wazzapihq/wazzapi-node",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/wazzapihq/wazzapi-py.git"
+		"url": "git+https://github.com/wazzapihq/wazzapi-node.git"
 	},
 	"bugs": {
-		"url": "https://github.com/wazzapihq/wazzapi-py/issues"
+		"url": "https://github.com/wazzapihq/wazzapi-node/issues"
 	},
 	"scripts": {
 		"build": "tsup src/index.ts --format esm,cjs --dts --clean",

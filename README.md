@@ -2,7 +2,7 @@
 
 Official Node.js and TypeScript SDK for WazzAPI.
 
-This package is a TypeScript-first port of the Python WazzAPI SDK, built for modern Node.js runtimes with Bun-powered development, typed models, ESM/CJS output, and an API surface that feels natural in TypeScript.
+This package is a modern Node.js and TypeScript SDK for WazzAPI, built with Bun-powered development, typed models, ESM/CJS output, and an API surface that feels natural in TypeScript.
 
 Use it to send WhatsApp messages, manage contacts and groups, work with templates, verify webhooks, and download encrypted WhatsApp media.
 
@@ -13,7 +13,7 @@ Use it to send WhatsApp messages, manage contacts and groups, work with template
 - ESM and CommonJS package output
 - bundled declaration files for TypeScript consumers
 - camelCase APIs for idiomatic TS usage
-- snake_case aliases for parity with the Python SDK
+- snake_case aliases for compatibility with existing naming styles
 - built-in webhook verification helpers
 - encrypted media download and decryption helpers
 - standard and advanced runnable examples
@@ -101,7 +101,7 @@ Preferred TypeScript method names use camelCase:
 - `client.messages.sendImage()`
 - `client.templates.builtinVariables()`
 
-For Python parity, snake_case aliases are also available:
+Snake_case aliases are also available:
 
 - `client.contacts.list_groups()`
 - `client.groups.get_participants()`
@@ -183,6 +183,23 @@ console.log(file.file_name, file.file_size);
 - `advanced-examples/custom-fetch.ts` — custom fetch injection for logging and telemetry
 - `advanced-examples/download-media.ts` — encrypted media download and verification
 - `advanced-examples/http-webhook-server.ts` — minimal Node HTTP webhook receiver
+
+## Documentation
+
+Topic-based documentation is available in `docs/`:
+
+- `docs/README.md`
+- `docs/authentication.md`
+- `docs/client.md`
+- `docs/messages.md`
+- `docs/groups.md`
+- `docs/contacts.md`
+- `docs/templates.md`
+- `docs/webhooks.md`
+- `docs/media.md`
+- `docs/errors.md`
+
+Repository: <https://github.com/wazzapihq/wazzapi-node>
 
 ## Try it
 
