@@ -5,7 +5,7 @@ Create and manage reusable message templates.
 ## List templates
 
 ```ts
-import { WazzapiClient } from "wazzapi";
+import { WazzapiClient } from "@wazzapi/wazzapi";
 
 const client = new WazzapiClient({ apiKey: process.env.WAZZAPI_API_KEY });
 const response = await client.templates.list({

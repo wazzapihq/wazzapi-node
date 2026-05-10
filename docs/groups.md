@@ -5,7 +5,7 @@ Manage WhatsApp groups.
 ## List groups
 
 ```ts
-import { WazzapiClient } from "wazzapi";
+import { WazzapiClient } from "@wazzapi/wazzapi";
 
 const client = new WazzapiClient({ apiKey: process.env.WAZZAPI_API_KEY });
 const response = await client.groups.list({ session_name: "main", limit: 50 });

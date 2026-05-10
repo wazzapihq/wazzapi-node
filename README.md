@@ -37,13 +37,13 @@ Do not use this Node.js library in a front-end application. Doing so can expose 
 ### Bun
 
 ```bash
-bun add wazzapi
+bun add @wazzapi/wazzapi
 ```
 
 ### npm
 
 ```bash
-npm install wazzapi
+npm install @wazzapi/wazzapi
 ```
 
 ## Configuration
@@ -70,7 +70,7 @@ Advanced media examples also use:
 ## Quick start
 
 ```ts
-import { WazzapiClient } from "wazzapi";
+import { WazzapiClient } from "@wazzapi/wazzapi";
 
 const client = new WazzapiClient({
   apiKey: process.env.WAZZAPI_API_KEY,
@@ -113,7 +113,7 @@ Snake_case aliases are also available:
 When the API returns a non-success response, the SDK throws `WazzapiAPIError`.
 
 ```ts
-import { WazzapiAPIError, WazzapiClient } from "wazzapi";
+import { WazzapiAPIError, WazzapiClient } from "@wazzapi/wazzapi";
 
 try {
   const client = new WazzapiClient({ apiKey: process.env.WAZZAPI_API_KEY });
@@ -132,7 +132,7 @@ try {
 Use `WebhookHandler` to verify the raw request body against `X-Wazzapi-Signature` before parsing JSON.
 
 ```ts
-import { WebhookHandler } from "wazzapi";
+import { WebhookHandler } from "@wazzapi/wazzapi";
 
 const handler = new WebhookHandler(process.env.WAZZAPI_WEBHOOK_SECRET || "");
 const event = handler.verifyAndParse(rawBody, request.headers);
@@ -157,7 +157,7 @@ Supported webhook event families:
 Use `downloadMedia()` to retrieve and decrypt WhatsApp media payloads.
 
 ```ts
-import { downloadMedia } from "wazzapi";
+import { downloadMedia } from "@wazzapi/wazzapi";
 
 const file = await downloadMedia(mediaUrl, mediaKey, mimeType, {
   file_name: "invoice.pdf",

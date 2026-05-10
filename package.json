@@ -1,5 +1,5 @@
 {
-	"name": "wazzapi",
+	"name": "@wazzapi/wazzapi",
 	"version": "0.2.0",
 	"description": "Typed Node.js SDK for WazzAPI",
 	"license": "MIT",
@@ -38,6 +38,9 @@
 	},
 	"bugs": {
 		"url": "https://github.com/wazzapihq/wazzapi-node/issues"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"scripts": {
 		"build": "tsup src/index.ts --format esm,cjs --dts --clean",

@@ -5,7 +5,7 @@ Manage contacts and contact groups.
 ## List contacts
 
 ```ts
-import { WazzapiClient } from "wazzapi";
+import { WazzapiClient } from "@wazzapi/wazzapi";
 
 const client = new WazzapiClient({ apiKey: process.env.WAZZAPI_API_KEY });
 const response = await client.contacts.list({ limit: 50, search: "alice" });

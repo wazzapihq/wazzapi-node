@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "wazzapi",
+      "name": "@wazzapi/wazzapi",
       "devDependencies": {
         "@biomejs/biome": "2.4.15",
         "@types/node": "^24.0.0",

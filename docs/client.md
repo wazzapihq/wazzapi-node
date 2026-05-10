@@ -5,7 +5,7 @@
 ## Initialize
 
 ```ts
-import { WazzapiClient } from "wazzapi";
+import { WazzapiClient } from "@wazzapi/wazzapi";
 
 const client = new WazzapiClient({ apiKey: "your-api-key" });
 ```

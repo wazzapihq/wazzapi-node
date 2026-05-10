@@ -23,19 +23,19 @@ Official documentation for the WazzAPI Node.js and TypeScript SDK.
 With Bun:
 
 ```bash
-bun add wazzapi
+bun add @wazzapi/wazzapi
 ```
 
 With npm:
 
 ```bash
-npm install wazzapi
+npm install @wazzapi/wazzapi
 ```
 
 ## Quick start
 
 ```ts
-import { WazzapiClient } from "wazzapi";
+import { WazzapiClient } from "@wazzapi/wazzapi";
 
 const client = new WazzapiClient({ apiKey: process.env.WAZZAPI_API_KEY });
 

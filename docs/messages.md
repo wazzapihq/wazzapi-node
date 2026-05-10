@@ -5,7 +5,7 @@ Send and manage WhatsApp messages.
 ## Send a text message
 
 ```ts
-import { WazzapiClient } from "wazzapi";
+import { WazzapiClient } from "@wazzapi/wazzapi";
 
 const client = new WazzapiClient({ apiKey: process.env.WAZZAPI_API_KEY });
 const response = await client.messages.send({

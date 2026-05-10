@@ -7,7 +7,7 @@ The SDK throws typed error classes for API, media, and webhook failures.
 Raised when the API returns a non-2xx response:
 
 ```ts
-import { WazzapiAPIError, WazzapiClient } from "wazzapi";
+import { WazzapiAPIError, WazzapiClient } from "@wazzapi/wazzapi";
 
 try {
   const client = new WazzapiClient({ apiKey: process.env.WAZZAPI_API_KEY });
@@ -26,7 +26,7 @@ try {
 Raised when media download or decryption fails:
 
 ```ts
-import { WazzapiMediaError, downloadMedia } from "wazzapi";
+import { WazzapiMediaError, downloadMedia } from "@wazzapi/wazzapi";
 
 try {
   await downloadMedia("https://example.com/missing.jpg", "media-key", "image/jpeg");

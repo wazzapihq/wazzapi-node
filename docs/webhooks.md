@@ -7,7 +7,7 @@ WazzAPI sends webhook events to your endpoint for incoming messages, message sta
 Always verify the signature before parsing the payload:
 
 ```ts
-import { WebhookHandler } from "wazzapi";
+import { WebhookHandler } from "@wazzapi/wazzapi";
 
 const handler = new WebhookHandler("your-webhook-secret");
 const webhook = handler.verifyAndParse(rawBody, request.headers);
@@ -42,8 +42,8 @@ WazzAPI sends these headers with every webhook:
 ## Working with message webhooks
 
 ```ts
-import { WebhookHandler } from "wazzapi";
-import type { PublicMessageWebhook } from "wazzapi";
+import { WebhookHandler } from "@wazzapi/wazzapi";
+import type { PublicMessageWebhook } from "@wazzapi/wazzapi";
 
 const handler = new WebhookHandler("your-webhook-secret");
 const webhook = handler.verifyAndParse(rawBody, request.headers);
@@ -59,8 +59,8 @@ if (webhook.event_type.startsWith("message.")) {
 ## Working with device webhooks
 
 ```ts
-import { WebhookHandler } from "wazzapi";
-import type { PublicDeviceWebhook } from "wazzapi";
+import { WebhookHandler } from "@wazzapi/wazzapi";
+import type { PublicDeviceWebhook } from "@wazzapi/wazzapi";
 
 const handler = new WebhookHandler("your-webhook-secret");
 const webhook = handler.verifyAndParse(rawBody, request.headers);
@@ -88,7 +88,7 @@ console.log(webhook.event_type);
 import {
   generateWebhookSignature,
   verifyWebhookSignature,
-} from "wazzapi";
+} from "@wazzapi/wazzapi";
 
 const expected = generateWebhookSignature(rawBody, "your-webhook-secret");
 const isValid = verifyWebhookSignature(

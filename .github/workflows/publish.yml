@@ -41,5 +41,38 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Publish to npm
+      - name: Detect npm package state
+        id: package_state
+        run: |
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          PACKAGE_URL=$(node -p "'https://registry.npmjs.org/' + encodeURIComponent(require('./package.json').name)")
+          echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+
+          if curl -fsS "$PACKAGE_URL" >/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish existing package with trusted publishing
+        if: steps.package_state.outputs.exists == 'true'
         run: npm publish --provenance --access public
+
+      - name: Require NPM_TOKEN for first publish
+        if: steps.package_state.outputs.exists != 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [[ -z "$NODE_AUTH_TOKEN" ]]; then
+            echo "::error::The npm package '${{ steps.package_state.outputs.name }}' does not exist yet. Add an npm publish token as the NPM_TOKEN repository secret for the first release. After the first successful publish, keep trusted publishing enabled for future releases."
+            exit 1
+          fi
+
+      - name: Publish new package with npm token
+        if: steps.package_state.outputs.exists != 'true'
+        env:
+          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ""
+          ACTIONS_ID_TOKEN_REQUEST_URL: ""
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: "false"
+        run: npm publish --access public

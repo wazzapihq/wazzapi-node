@@ -5,7 +5,7 @@ Download and decrypt encrypted WhatsApp media files.
 ## Download media
 
 ```ts
-import { downloadMedia } from "wazzapi";
+import { downloadMedia } from "@wazzapi/wazzapi";
 
 const result = await downloadMedia(
   "https://example.com/media",
