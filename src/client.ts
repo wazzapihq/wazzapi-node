@@ -1,11 +1,14 @@
 import { WazzapiAPIError } from "./errors";
 import { filterNone, type JsonRecord, serializeData } from "./models/base";
 import {
+	CampaignsResource,
 	ContactsResource,
+	ConversationsResource,
 	DevicesResource,
 	GroupsResource,
 	MessagesResource,
 	TemplatesResource,
+	WebhookSubscriptionsResource,
 } from "./resources";
 
 export const DEFAULT_BASE_URL = "https://api.wazzapi.com";
@@ -79,11 +82,14 @@ function normalizeBaseUrl(baseUrl: string): string {
 
 export class WazzapiClient {
 	readonly http: WazzapiHttpConfig;
+	readonly campaigns: CampaignsResource;
 	readonly contacts: ContactsResource;
+	readonly conversations: ConversationsResource;
 	readonly devices: DevicesResource;
 	readonly groups: GroupsResource;
 	readonly messages: MessagesResource;
 	readonly templates: TemplatesResource;
+	readonly webhookSubscriptions: WebhookSubscriptionsResource;
 
 	constructor(options: WazzapiClientOptions = {}) {
 		const baseUrl = options.baseUrl ?? DEFAULT_BASE_URL;
@@ -97,11 +103,18 @@ export class WazzapiClient {
 			fetch: fetcher,
 		};
 
+		this.campaigns = new CampaignsResource(this);
 		this.contacts = new ContactsResource(this);
+		this.conversations = new ConversationsResource(this);
 		this.devices = new DevicesResource(this);
 		this.groups = new GroupsResource(this);
 		this.messages = new MessagesResource(this);
 		this.templates = new TemplatesResource(this);
+		this.webhookSubscriptions = new WebhookSubscriptionsResource(this);
+	}
+
+	get webhook_subscriptions(): WebhookSubscriptionsResource {
+		return this.webhookSubscriptions;
 	}
 
 	get base_url(): string {

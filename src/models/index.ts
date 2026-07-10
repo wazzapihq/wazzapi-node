@@ -1,5 +1,7 @@
 export type { WazzapiModel } from "./base";
+export * from "./campaigns";
 export * from "./contacts";
+export * from "./conversations";
 export * from "./devices";
 export * from "./groups";
 export * from "./media";
