@@ -137,6 +137,9 @@ export interface SendMessageRequest extends WazzapiModel {
 	message_type?: string;
 	media_type?: string | null;
 	media_url?: string | null;
+	media_base64?: string | null;
+	filename?: string | null;
+	mimetype?: string | null;
 	caption?: string | null;
 	latitude?: number | null;
 	longitude?: number | null;

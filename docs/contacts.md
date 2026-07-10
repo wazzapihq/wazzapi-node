@@ -61,6 +61,24 @@ const result = await client.contacts.bulkDelete({
 console.log(result.deleted);
 ```
 
+## Profile pictures
+
+Fetch ephemeral WhatsApp profile picture metadata or image bytes for a contact.
+
+```ts
+const meta = await client.contacts.getProfilePicture("contact-id", {
+  preview: true,
+});
+console.log(meta.url, meta.picture_id);
+
+// Stream image bytes through WazzAPI (proxy: true) instead of following a redirect.
+const image = await client.contacts.getProfilePictureImage("contact-id", {
+  preview: true,
+  proxy: true,
+});
+console.log(image.content_type, image.content.length);
+```
+
 ## Contact groups
 
 ### List groups

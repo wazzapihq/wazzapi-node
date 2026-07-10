@@ -261,4 +261,60 @@ export class ContactsResource extends BaseResource {
 	async delete(contactId: string): Promise<void> {
 		await this._client._request("DELETE", `/api/v1/contacts/${contactId}`);
 	}
+
+	async getProfilePicture(
+		contactId: string,
+		options?: {
+			whatsapp_account_id?: string;
+			preview?: boolean;
+		},
+	): Promise<models.ContactProfilePictureResponse> {
+		return this._client._request(
+			"GET",
+			`/api/v1/contacts/${contactId}/profile-picture`,
+			{
+				params: options,
+				responseParser: models.parseContactProfilePictureResponse,
+			},
+		);
+	}
+
+	async get_profile_picture(
+		contactId: string,
+		options?: {
+			whatsapp_account_id?: string;
+			preview?: boolean;
+		},
+	): Promise<models.ContactProfilePictureResponse> {
+		return this.getProfilePicture(contactId, options);
+	}
+
+	async getProfilePictureImage(
+		contactId: string,
+		options?: {
+			whatsapp_account_id?: string;
+			preview?: boolean;
+			proxy?: boolean;
+		},
+	): Promise<models.ContactProfilePictureImageResult> {
+		return this._client._requestBytes(
+			"GET",
+			`/api/v1/contacts/${contactId}/profile-picture/image`,
+			{
+				params: options,
+				responseParser: models.parseContactProfilePictureImageResult,
+			},
+		);
+	}
+
+	async get_profile_picture_image(
+		contactId: string,
+		options?: {
+			whatsapp_account_id?: string;
+			preview?: boolean;
+			proxy?: boolean;
+		},
+	): Promise<models.ContactProfilePictureImageResult> {
+		return this.getProfilePictureImage(contactId, options);
+	}
 }

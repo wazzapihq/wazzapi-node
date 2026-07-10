@@ -1,6 +1,6 @@
 {
 	"name": "@wazzapi/wazzapi",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"description": "Typed Node.js SDK for WazzAPI",
 	"license": "MIT",
 	"type": "module",
@@ -49,9 +49,9 @@
 		"prepublishOnly": "bun run typecheck && bun run test && bun run build"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.15",
-		"@types/node": "^24.0.0",
-		"tsup": "^8.5.0",
-		"typescript": "^5.8.3"
+		"@biomejs/biome": "2.5.3",
+		"@types/node": "^24.13.3",
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3"
 	}
 }

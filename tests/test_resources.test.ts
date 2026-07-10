@@ -121,4 +121,64 @@ describe("resource routes", () => {
 		expect(result[0].account_id).toBe("wa_123");
 		expect(result[0].last_sync_at instanceof Date).toBe(true);
 	});
+
+	test("get profile picture returns metadata", async () => {
+		const seen: { method?: string; path?: string; search?: string } = {};
+		const client = createMockClient((url, init) => {
+			seen.method = init?.method;
+			seen.path = url.pathname;
+			seen.search = url.search;
+			return new Response(
+				JSON.stringify({
+					contact_id: "contact_1",
+					phone_number: "+6281234567890",
+					url: "https://cdn.example.com/pic.jpg",
+					picture_id: "pic_1",
+					picture_type: "image",
+					preview: true,
+					whatsapp_account_id: "wa_1",
+					cached: false,
+				}),
+				{ status: 200, headers: { "content-type": "application/json" } },
+			);
+		});
+
+		const result = await client.contacts.getProfilePicture("contact_1", {
+			whatsapp_account_id: "wa_1",
+			preview: true,
+		});
+
+		expect(seen.method).toBe("GET");
+		expect(seen.path).toBe("/api/v1/contacts/contact_1/profile-picture");
+		expect(seen.search).toContain("whatsapp_account_id=wa_1");
+		expect(result.url).toBe("https://cdn.example.com/pic.jpg");
+		expect(result.preview).toBe(true);
+	});
+
+	test("get profile picture image returns bytes", async () => {
+		const seen: { method?: string; path?: string; search?: string } = {};
+		const imageBytes = new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 1, 2, 3]);
+		const client = createMockClient((url, init) => {
+			seen.method = init?.method;
+			seen.path = url.pathname;
+			seen.search = url.search;
+			return new Response(imageBytes, {
+				status: 200,
+				headers: { "content-type": "image/jpeg" },
+			});
+		});
+
+		const result = await client.contacts.getProfilePictureImage("contact_1", {
+			proxy: true,
+			preview: false,
+		});
+
+		expect(seen.method).toBe("GET");
+		expect(seen.path).toBe("/api/v1/contacts/contact_1/profile-picture/image");
+		expect(seen.search).toContain("proxy=true");
+		expect(Buffer.isBuffer(result.content)).toBe(true);
+		expect(result.content.equals(Buffer.from(imageBytes))).toBe(true);
+		expect(result.content_type).toBe("image/jpeg");
+	});
+
 });

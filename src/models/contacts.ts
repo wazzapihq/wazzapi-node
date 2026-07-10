@@ -172,6 +172,23 @@ export interface ContactUpdateRequest extends WazzapiModel {
 	is_opted_out?: boolean | null;
 }
 
+export interface ContactProfilePictureResponse extends WazzapiModel {
+	contact_id: string;
+	phone_number: string;
+	url: string;
+	picture_id?: string | null;
+	picture_type?: string | null;
+	preview: boolean;
+	whatsapp_account_id: string;
+	cached?: boolean;
+}
+
+export interface ContactProfilePictureImageResult extends WazzapiModel {
+	content: Buffer;
+	content_type?: string | null;
+	final_url?: string | null;
+}
+
 export interface RemoveFromGroupRequest extends WazzapiModel {
 	contact_ids: string[];
 }
@@ -294,4 +311,20 @@ export function parseContactSyncStatusResponseList(
 	input: unknown,
 ): ContactSyncStatusResponse[] {
 	return mapArray(input, parseContactSyncStatusResponse);
+}
+
+export function parseContactProfilePictureResponse(
+	input: unknown,
+): ContactProfilePictureResponse {
+	return cloneObject<ContactProfilePictureResponse>(input);
+}
+
+export function parseContactProfilePictureImageResult(
+	input: unknown,
+): ContactProfilePictureImageResult {
+	const output = cloneObject<ContactProfilePictureImageResult>(input);
+	if (output.content && !Buffer.isBuffer(output.content)) {
+		output.content = Buffer.from(output.content as Uint8Array);
+	}
+	return output;
 }

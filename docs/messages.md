@@ -45,6 +45,24 @@ await client.messages.sendVoice({
   whatsapp_account_id: "your-whatsapp-account-id",
   media_url: "https://example.com/voice.ogg",
 });
+
+// Inline base64 media (takes precedence over media_url when both are set)
+await client.messages.sendImage({
+  phone_number: "+6281234567890",
+  whatsapp_account_id: "your-whatsapp-account-id",
+  media_base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...",
+  caption: "Inline image",
+});
+
+// Document from raw base64 requires filename or mimetype
+await client.messages.sendDocument({
+  phone_number: "+6281234567890",
+  whatsapp_account_id: "your-whatsapp-account-id",
+  media_base64: "JVBERi0xLjQKJcfs...",
+  filename: "invoice.pdf",
+  mimetype: "application/pdf",
+  caption: "April invoice",
+});
 ```
 
 ## Send a location

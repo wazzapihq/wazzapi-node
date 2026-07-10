@@ -29,6 +29,11 @@ export interface RequestOptions<T> {
 	responseParser?: (payload: unknown) => T;
 }
 
+export interface BinaryRequestOptions<T> {
+	params?: JsonRecord;
+	responseParser?: (payload: unknown) => T;
+}
+
 export interface WazzapiHttpConfig {
 	readonly baseUrl: string;
 	readonly headers: Record<string, string>;
@@ -159,6 +164,67 @@ export class WazzapiClient {
 			}
 
 			return (payload ?? responseText) as T;
+		} finally {
+			clearTimeout(timeoutId);
+		}
+	}
+
+	async _requestBytes<T = unknown>(
+		method: string,
+		path: string,
+		options: BinaryRequestOptions<T> = {},
+	): Promise<T> {
+		const url = new URL(path, `${this.http.baseUrl}/`);
+		const params = filterNone(options.params);
+
+		if (params) {
+			Object.entries(params).forEach(([key, value]) => {
+				url.searchParams.set(key, String(value));
+			});
+		}
+
+		const controller = new AbortController();
+		const timeoutId = setTimeout(() => {
+			controller.abort();
+		}, this.http.timeout);
+
+		try {
+			const response = await this.http.fetch(url.toString(), {
+				method,
+				headers: this.http.headers,
+				signal: controller.signal,
+				redirect: "follow",
+			});
+
+			const content = Buffer.from(await response.arrayBuffer());
+
+			if (response.status >= 400) {
+				let payload: unknown;
+				const text = content.toString("utf8");
+				try {
+					payload = text ? JSON.parse(text) : undefined;
+				} catch {
+					payload = undefined;
+				}
+				throw WazzapiAPIError.fromResponseParts(
+					response.status,
+					response.statusText,
+					text,
+					payload,
+				);
+			}
+
+			const result = {
+				content,
+				content_type: response.headers.get("content-type"),
+				final_url: response.url || url.toString(),
+			};
+
+			if (options.responseParser) {
+				return options.responseParser(result);
+			}
+
+			return result as T;
 		} finally {
 			clearTimeout(timeoutId);
 		}
