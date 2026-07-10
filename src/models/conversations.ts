@@ -43,6 +43,10 @@ export interface ConversationMessageItem extends WazzapiModel {
 	status: string;
 	message_type: string;
 	phone_number: string;
+	media_type?: string | null;
+	media_url?: string | null;
+	media_filename?: string | null;
+	media_mimetype?: string | null;
 	whatsapp_message_id?: string | null;
 	created_at: Date;
 	sent_at?: Date | null;
@@ -58,7 +62,14 @@ export interface ConversationMessageListResponse extends WazzapiModel {
 }
 
 export interface ConversationReplyRequest extends WazzapiModel {
-	content: string;
+	content?: string | null;
+	caption?: string | null;
+	message_type?: string;
+	media_url?: string | null;
+	media_base64?: string | null;
+	media_type?: string | null;
+	filename?: string | null;
+	mimetype?: string | null;
 	whatsapp_account_id?: string | null;
 }
 
@@ -67,6 +78,7 @@ export interface ConversationReplyResponse extends WazzapiModel {
 	message_id: string;
 	conversation_id: string;
 	status: string;
+	message_type?: string;
 }
 
 export function parseConversationItem(input: unknown): ConversationItem {
